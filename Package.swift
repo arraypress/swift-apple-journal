@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "swift-apple-journal",
-    // SQLite3 is in the OS; RTF is read through swift-rich-text. macOS
+    // SQLite is read through swift-sqlite-reader; RTF through swift-rich-text. macOS
     // only — Journal's store on a Mac is the one this reads.
     platforms: [
         .macOS(.v14)
@@ -13,9 +13,13 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/arraypress/swift-rich-text.git", from: "0.1.0"),
+        .package(url: "https://github.com/arraypress/swift-sqlite-reader.git", from: "0.1.0"),
     ],
     targets: [
-        .target(name: "AppleJournal", dependencies: [.product(name: "RichText", package: "swift-rich-text")]),
+        .target(name: "AppleJournal", dependencies: [
+            .product(name: "RichText", package: "swift-rich-text"),
+            .product(name: "SQLiteReader", package: "swift-sqlite-reader"),
+        ]),
         .testTarget(name: "AppleJournalTests", dependencies: ["AppleJournal"]),
     ]
 )

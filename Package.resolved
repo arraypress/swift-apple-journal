@@ -1,5 +1,5 @@
 {
-  "originHash" : "5f47973e23198a2c6202d2b55dd402e42add1d0d5034a85993dd0d864631d5a4",
+  "originHash" : "91ea7284d77f1518406f7314fec1c08de58e1ae368a3589e2e965a1cb2e5fa0b",
   "pins" : [
     {
       "identity" : "swift-rich-text",
@@ -7,6 +7,15 @@
       "location" : "https://github.com/arraypress/swift-rich-text.git",
       "state" : {
         "revision" : "021719b3f2dbab1d152249ba6b87d93db06a9772",
+        "version" : "0.1.0"
+      }
+    },
+    {
+      "identity" : "swift-sqlite-reader",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/arraypress/swift-sqlite-reader.git",
+      "state" : {
+        "revision" : "ecccbec440c5de3ae1f1e33c509665451607fe89",
         "version" : "0.1.0"
       }
     }
