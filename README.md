@@ -44,9 +44,11 @@ Measured on macOS 27 with entries written for the purpose:
 
 ## Writing
 
-Nothing here writes. Journal has no AppleScript dictionary; its Shortcuts actions can
-create an entry (title, text, date, bookmark, location, media) but not choose its journal,
-edit or delete one. Writing to the store directly would bypass iCloud's sync — never.
+Nothing here writes, and on the Mac nothing can. Journal has no AppleScript dictionary.
+It registers a Create Entry intent (title, text, date, bookmark, location, media — no way
+to choose a journal, edit or delete), but Shortcuts on the Mac does not list Journal and
+refuses to import a shortcut that uses its actions (measured on macOS 27). Writing to the
+store directly would bypass iCloud's sync — never.
 
 ## Tested
 
