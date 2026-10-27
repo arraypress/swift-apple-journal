@@ -47,30 +47,6 @@ final class JournalTests: XCTestCase {
         XCTAssertNil(CRDTStrings.table(otherField), "only field-2 strings make the table")
     }
 
-    func testRichTextKeepsEmphasisAndLists() throws {
-        let text = NSMutableAttributedString()
-        let body = NSFont.systemFont(ofSize: 13)
-        func add(_ string: String, _ font: NSFont = body, extra: [NSAttributedString.Key: Any] = [:]) {
-            text.append(NSAttributedString(string: string, attributes: [.font: font].merging(extra) { $1 }))
-        }
-        add("Plain then ")
-        add("strong", NSFontManager.shared.convert(body, toHaveTrait: .boldFontMask))
-        add(" and ")
-        add("gone", extra: [.strikethroughStyle: NSUnderlineStyle.single.rawValue])
-        add("\n")
-        let list = NSMutableParagraphStyle()
-        list.textLists = [NSTextList(markerFormat: .disc, options: 0)]
-        for item in ["seeds", "soil"] {
-            text.append(NSAttributedString(string: "\t•\t\(item)\n", attributes: [.font: body, .paragraphStyle: list]))
-        }
-        let rtf = try text.data(from: NSRange(location: 0, length: text.length), documentAttributes: [.documentType: NSAttributedString.DocumentType.rtf])
-        let markdown = RichText.markdown(rtf)
-        XCTAssert(markdown.hasPrefix("Plain then **strong** and ~~gone~~"), markdown)
-        XCTAssert(markdown.contains("- ") && markdown.contains("seeds") && markdown.contains("soil"), markdown)
-        XCTAssertEqual(RichText.plain(Data("not rtf".utf8)), "")
-        XCTAssertEqual(RichText.marked(" word ", bold: true, italic: true, struck: false), " **_word_** ", "marks inside the spaces")
-    }
-
     func testMetadataSkipsItsVersionByte() {
         let map = Data([0x01]) + Data(#"{"visitsData":[{"placeName":"Harbour Café"},{"placeName":"Old Mill"},{"placeName":"Harbour Café"}]}"#.utf8)
         XCTAssertEqual(AttachmentDetails.places(AttachmentDetails.object(map)), ["Harbour Café", "Old Mill"], "each place once")

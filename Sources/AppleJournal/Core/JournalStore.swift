@@ -9,11 +9,12 @@
 //  container ("Moments" was Journal's working name), opened read-only. It is
 //  not encrypted on the Mac (end-to-end encryption is iCloud's), but it sits
 //  in a protected container: the app running this needs Full Disk Access.
-//  Titles and words are RTF (RichText); a journal's name lives in a sync
+//  Titles and words are RTF (swift-rich-text); a journal's name lives in a sync
 //  record (CRDTStrings); attachments are files under `Attachments/`.
 //
 
 import Foundation
+import RichText
 import SQLite3
 
 /// Apple Journal's journals and entries, read-only.
